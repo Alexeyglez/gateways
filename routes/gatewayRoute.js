@@ -7,6 +7,7 @@ import {
   deleteGateway,
   updateGateway,
   addPeripheral,
+  deletePeripheral,
 } from "../controllers/gatewayController.js";
 
 const router = Router();
@@ -19,5 +20,6 @@ router
   .patch(updateGateway);
 
 router.route("/:id/add").put(addPeripheral);
+router.route("/:id/delete").delete(deletePeripheral);
 
 export default router;

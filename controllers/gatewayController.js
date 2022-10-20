@@ -4,7 +4,7 @@ import Gateway from "../models/Gateway.js";
 import { isIPv4 } from "is-ip";
 
 export const getAllGateways = async (req, res) => {
-  const gateways = await Gateway.find();
+  const gateways = await Gateway.find().populate("peripheralDevice");
   res.status(StatusCodes.OK).json({ gateways, count: gateways.length });
 };
 
@@ -75,34 +75,33 @@ export const deleteGateway = async (req, res) => {
 
 export const addPeripheral = async (req, res) => {
   const { id: gatewayId } = req.params;
-  const { peripherals } = req.body;
+  const { peripheral } = req.body;
 
   const gateway = await Gateway.findOne({ _id: gatewayId });
   if (!gateway) {
     throw new NotFoundError(`No gateway with id ${gatewayId}`);
   }
-  if (peripherals.length < 1 || !peripherals) {
+
+  if (!peripheral) {
     throw new BadRequestError("No peripheral device provided");
   }
 
-  for (const peripheral of peripherals) {
-    if (gateway.peripheralDevice.length >= 10) {
-      throw new BadRequestError(
-        "The gateway cannnot have more 10 peripherals devices"
-      );
-    }
-
-    if (gateway.peripheralDevice.includes(peripheral)) {
-      throw new BadRequestError("The peripheral is already exists in gateway");
-    }
-
-    gateway.peripheralDevice.push(peripheral);
+  if (gateway.peripheralDevice.length >= 10) {
+    throw new BadRequestError(
+      "The gateway cannnot have more 10 peripherals devices"
+    );
   }
+
+  if (gateway.peripheralDevice.includes(peripheral)) {
+    throw new BadRequestError("The peripheral is already exists in gateway");
+  }
+  gateway.peripheralDevice.push(peripheral);
+
   await gateway.save();
   res.status(StatusCodes.OK).json({ gateway });
 };
 
-export const removePeripheral = async (req, res) => {
+export const deletePeripheral = async (req, res) => {
   const { id: gatewayId } = req.params;
   const { peripheral } = req.body;
 
@@ -110,7 +109,19 @@ export const removePeripheral = async (req, res) => {
   if (!gateway) {
     throw new NotFoundError(`No gateway with id ${gatewayId}`);
   }
-  if (peripheral.length < 1 || !peripheral) {
+  if (!peripheral) {
     throw new BadRequestError("No peripheral device provided");
   }
+  if (!gateway.peripheralDevice.includes(peripheral)) {
+    throw new BadRequestError("The peripheral device is not exists in gateway");
+  } else {
+    gateway.peripheralDevice.splice(
+      gateway.peripheralDevice.indexOf(peripheral)
+    );
+  }
+
+  await gateway.save();
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: "Success! peripheral device removed!" });
 };

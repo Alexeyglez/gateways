@@ -27,4 +27,4 @@ const PeripheralSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Device", PeripheralSchema);
+export default mongoose.model("Peripheral", PeripheralSchema);

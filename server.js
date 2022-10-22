@@ -53,3 +53,6 @@ const start = async () => {
 };
 
 start();
+
+// export for jest tests
+export default app;

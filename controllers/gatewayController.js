@@ -1,7 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import { BadRequestError, NotFoundError } from "../errors/index.js";
 import Gateway from "../models/Gateway.js";
-import { isIPv4 } from "is-ip";
+//import { isIPv4 } from "is-ip";
+import net from "net";
 
 export const getAllGateways = async (req, res) => {
   const gateways = await Gateway.find().populate("peripheralDevice");
@@ -30,7 +31,7 @@ export const createGateway = async (req, res) => {
   if (serialNumberAlreadyExists) {
     throw new BadRequestError("Serial number already exists");
   }
-  if (!isIPv4(address)) {
+  if (!net.isIPv4(address)) {
     throw new BadRequestError("Please provide a correct ip address");
   }
   const gateway = await Gateway.create({

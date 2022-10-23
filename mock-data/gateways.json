@@ -1,0 +1,75 @@
+[
+  {
+    "_id": "63543c9c35ba103f7dcc4738",
+    "serialNumber": "ln567pq489st0123",
+    "gatewayName": "Karangtengah",
+    "peripheralDevice": ["6354aa003cf4a464dc601ac6"],
+    "address": "192.168.10.12"
+  },
+  {
+    "serialNumber": "ln567pq489st0124",
+    "gatewayName": "Gnosjö",
+    "peripheralDevice": [],
+    "address": "192.168.10.11"
+  },
+  {
+    "serialNumber": "ln567pq489st0125",
+    "gatewayName": "Sulkava",
+    "peripheralDevice": [],
+    "address": "192.168.10.10"
+  },
+  {
+    "serialNumber": "ln567pq489st0126",
+    "gatewayName": "København",
+    "peripheralDevice": [],
+    "address": "192.168.10.9"
+  },
+  {
+    "serialNumber": "ln567pq489st0127",
+    "gatewayName": "Zheyuan",
+    "peripheralDevice": [],
+    "address": "192.168.10.8"
+  },
+  {
+    "serialNumber": "ln567pq489st0128",
+    "gatewayName": "Pergamos",
+    "peripheralDevice": [],
+    "address": "192.168.10.7"
+  },
+  {
+    "serialNumber": "ln567pq489st0129",
+    "gatewayName": "Pandangan Kulon",
+    "peripheralDevice": [],
+    "address": "192.168.10.6"
+  },
+  {
+    "serialNumber": "ln567pq489st0130",
+    "gatewayName": "Būrabay",
+    "peripheralDevice": [],
+    "address": "192.168.10.5"
+  },
+  {
+    "serialNumber": "ln567pq489st0131",
+    "gatewayName": "Rio Pardo",
+    "peripheralDevice": [],    
+    "address": "192.168.10.4"
+  },
+  {
+    "serialNumber": "ln567pq489st0132",
+    "gatewayName": "Giồng Riềng",
+    "peripheralDevice": [],
+    "address": "192.168.10.3"
+  },
+  {
+    "serialNumber": "ln567pq489st0133",
+    "gatewayName": "Methven",
+    "peripheralDevice": [],
+    "address": "192.168.10.2"
+  },
+  {
+    "serialNumber": "ln567pq489st0134",
+    "gatewayName": "Liushutun",
+    "peripheralDevice": [],
+    "address": "192.168.10.1"
+  }  
+]

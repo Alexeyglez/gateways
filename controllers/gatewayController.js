@@ -3,6 +3,7 @@ import { BadRequestError, NotFoundError } from "../errors/index.js";
 import Gateway from "../models/Gateway.js";
 //import { isIPv4 } from "is-ip";
 import net from "net";
+import Peripheral from "../models/Peripheral.js";
 
 export const getAllGateways = async (req, res) => {
   const gateways = await Gateway.find().populate("peripheralDevice");
@@ -97,6 +98,10 @@ export const addPeripheral = async (req, res) => {
     throw new BadRequestError("The peripheral is already exists in gateway");
   }
   gateway.peripheralDevice.push(peripheral);
+  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
+
+  peripheralDevice.gateway = gateway._id;
+  await peripheralDevice.save();
 
   await gateway.save();
   res.status(StatusCodes.OK).json({ gateway });
@@ -115,12 +120,12 @@ export const deletePeripheral = async (req, res) => {
   }
   if (!gateway.peripheralDevice.includes(peripheral)) {
     throw new BadRequestError("The peripheral device is not exists in gateway");
-  } else {
-    gateway.peripheralDevice.splice(
-      gateway.peripheralDevice.indexOf(peripheral)
-    );
   }
+  gateway.peripheralDevice.splice(gateway.peripheralDevice.indexOf(peripheral));
+  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
 
+  peripheralDevice.gateway = null;
+  await peripheralDevice.save();
   await gateway.save();
   res
     .status(StatusCodes.OK)

@@ -1,0 +1,89 @@
+[
+  {
+    "_id" : "6354aa003cf4a464dc601ac6",
+    "uid": "428756985",    
+    "vendor": "Karangtengah",
+    "status": "offline",
+    "gateway": null,
+    "date": "2020-01-06T12:17:11Z"
+  },
+  {
+    "_id" : "6354aabc79cb2729c8e6993e",
+    "uid": "428756986",   
+    "vendor": "Gnosjö",
+    "status": "online",
+    "gateway": null,
+    "date": "2020-08-11T04:52:58Z"
+  },
+  {
+    "_id" : "6354aabc79cb2729c8e69941",
+    "uid": "428756987",   
+    "vendor": "Sulkava",
+    "status": "online",
+    "gateway": null,
+    "date": "2021-09-22T20:17:03Z"
+  },
+  {
+    "uid": "428756988",   
+    "vendor": "København",
+    "status": "offline",
+    "gateway": null,
+    "date": "2020-11-29T01:32:17Z"
+  },
+  {
+    "uid": "428756989",   
+    "vendor": "Zheyuan",
+    "status": "offline",
+    "gateway": null,
+    "date": "2020-04-19T09:50:29Z"
+  },
+  {
+    "uid": "428756990",   
+    "vendor": "Pergamos",
+    "status": "online",
+    "gateway": null,
+    "date": "2020-01-10T09:00:17Z"
+  },
+  {
+    "uid": "428756991",
+    "vendor": "Pandangan Kulon",
+    "status": "online",
+    "gateway": null,
+    "date": "2020-01-15T01:12:55Z"
+  },
+  {
+    "uid": "428756992",
+    "vendor": "Būrabay",
+    "status": "offline",
+    "gateway": null,
+    "date": "2020-06-20T05:16:03Z"
+  },
+  {
+    "uid": "428756993",
+    "vendor": "Rio Pardo",
+    "status": "offline",
+    "gateway": null,
+    "date": "2021-03-05T09:15:30Z"
+  },
+  {
+    "uid": "428756994",
+    "vendor": "Giồng Riềng",
+    "status": "offline",
+    "gateway": null,
+    "date": "2021-08-23T02:08:39Z"
+  },
+  {
+    "uid": "428756995",
+    "vendor": "Methven",
+    "status": "online",
+    "gateway": null,
+    "date": "2020-10-23T03:37:19Z"
+  },
+  {
+    "uid": "428756996",
+    "vendor": "Liushutun",
+    "status": "online",
+    "gateway": null,
+    "date": "2020-04-14T23:21:45Z"
+  }
+]

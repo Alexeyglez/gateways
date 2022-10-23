@@ -8,6 +8,7 @@ const PeripheralSchema = new mongoose.Schema(
     },
     vendor: {
       type: String,
+      required: [true, "Please provide vendor"],
     },
     date: {
       type: Date,

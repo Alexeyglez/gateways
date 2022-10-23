@@ -32,16 +32,23 @@ describe("GET /api/v1/gateways", () => {
 describe("GET /api/v1/gateways/:id", () => {
   test("should respond with a 200 status code", async () => {
     const response = await request(app)
-      .get("/api/v1/gateways/634ebf6ce8f4dc2f7b886a70")
+      .get("/api/v1/gateways/63543c9c35ba103f7dcc4738")
       .send();
     expect(response.statusCode).toBe(200);
   });
 
   test("should respond an object", async () => {
     const response = await request(app)
-      .get("/api/v1/gateways/634ebf6ce8f4dc2f7b886a70")
+      .get("/api/v1/gateways/63543c9c35ba103f7dcc4738")
       .send();
     expect(response.body).toBeInstanceOf(Object);
+  });
+
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/gateways/63541a766a4966909f491a45")
+      .send();
+    expect(response.statusCode).toBe(404);
   });
 });
 
@@ -49,7 +56,7 @@ describe("GET /api/v1/gateways/:id", () => {
 describe("POST /api/gateways", () => {
   describe("given a serialNumber, address and gatewayName", () => {
     const gateway = {
-      serialNumber: "sometitlebnvgf",
+      serialNumber: "sometitleb1",
       gatewayName: "some name",
       address: "192.10.150.1",
       peripheralDevice: [],
@@ -80,6 +87,7 @@ describe("POST /api/gateways", () => {
         { serialNumber: "some title bnv" },
         { gatewayName: "some name" },
         { address: "192.10.150.1" },
+        { peripheralDevice: [] },
       ];
 
       for (const body of fields) {
@@ -92,118 +100,161 @@ describe("POST /api/gateways", () => {
 
 /** Testing Update a Gateway */
 describe("PUT /api/v1/gateways/:id", () => {
-  it("should update a gateway", async () => {
-    try {
-      const res = await request(app)
-        .patch("/api/v1/gateways/634eb43b770654e867eaa3fc")
-        .send({
-          serialNumber: "vwxyz0123456790",
-          gatewayName: "gateway3",
-          address: "192.168.0.5",
-          peripheralDevice: [],
-        });
-      expect(res.statusCode).toBe(200);
-      expect(res.body.price).toBe(104);
-    } catch (error) {
-      expect(error);
-    }
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/gateways/63543c9c35ba103f7dcc4738")
+      .send();
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/gateways/63541a766a4966909f491a45")
+      .send();
+    expect(response.statusCode).toBe(404);
   });
 });
 
 /** Testing Delete a Gateway */
 describe("DELETE /api/v1/gateways/:id", () => {
-  it("should delete a gateway", async () => {
-    try {
-      const res = await request(app).delete(
-        "/api/v1/gateways/634eb43b770654e867eaa3fc"
-      );
-      expect(res.statusCode).toBe(200);
-    } catch (error) {
-      expect(error);
-    }
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .delete("/api/v1/gateways/63543c9c35ba103f7dcc4738")
+      .send();
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/gateways/634eb43b770654e867eaa300")
+      .send();
+    expect(response.statusCode).toBe(404);
   });
 });
 
-/******* */
+/*******  Testing Peripheral Devices  */
 
 /** Testing Get All Peripheral Devices */
 describe("GET /api/v1/peripherals", () => {
-  it("Should return all peripherals", async () => {
-    try {
-      const res = await request(app).get("/api/v1/peripherals");
-      expect(res.statusCode).toBe(200);
-      expect(res.body.length).toBeGreaterThan(0);
-    } catch (e) {
-      expect(e);
-    }
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app).get("/api/v1/peripherals").send();
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("should respond an Object", async () => {
+    const response = await request(app).get("/api/v1/peripherals").send();
+    expect(response.body).toBeInstanceOf(Object);
   });
 });
 
 /** Testing Get Single Peripheral */
 describe("GET /api/v1/peripherals/:id", () => {
-  it("should return a peripheral", async () => {
-    try {
-      const res = await request(app).get(
-        "/api/v1/peripherals/6350beac53f9338a0b10db09"
-      );
-      expect(res.statusCode).toBe(200);
-      expect(res.body.name).toBe("Peripheral 1");
-    } catch (error) {
-      expect(error);
-    }
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/6354aabc79cb2729c8e69941")
+      .send();
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("should respond an object", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/6354aabc79cb2729c8e69941")
+      .send();
+    expect(response.body).toBeInstanceOf(Object);
+  });
+
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/63541a766a4966909f491a45")
+      .send();
+    expect(response.statusCode).toBe(404);
   });
 });
 
 /** Testing Create a Peripheral Device */
 describe("POST /api/v1/peripherals", () => {
-  it("should create a peripheral", async () => {
-    try {
-      const res = await request(app).post("/api/v1/peripherals").send({
+  describe("given a uid, vendor, status, date and gateway", () => {
+    const peripheralDevice = {
+      uid: 428756985,
+      vendor: "sder23423",
+      status: "offline",
+      date: Date.now,
+    };
+
+    // should respond with a 201 code
+    test("should respond with a 201 status code", async () => {
+      const response = await request(app)
+        .post("/api/v1/peripherals")
+        .send(peripheralDevice);
+      expect(response.statusCode).toBe(201);
+    });
+
+    // should respond a json as a content type
+    test("should have a Content-Type: application/json header", async () => {
+      const response = await request(app)
+        .post("/api/v1/peripherals")
+        .send(peripheralDevice);
+      expect(response.headers["content-type"]).toEqual(
+        expect.stringContaining("json")
+      );
+    });
+  });
+  describe("when the uid, vendor, status, date and gateway are missing", () => {
+    // should respond with a 400 code
+    test("shoud respond with a 400 status code", async () => {
+      const fields = [
+        { uid: 428756985 },
+        { vendor: "sder23423" },
+        { status: "offline" },
+        { date: Date.now },
+      ];
+
+      for (const body of fields) {
+        const response = await request(app)
+          .post("/api/v1/peripherals")
+          .send(body);
+        expect(response.statusCode).toBe(400);
+      }
+    });
+  });
+});
+
+/** Testing Update a Peripheral */
+describe("PUT /api/v1/peripherals/:id", () => {
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/6354aabc79cb2729c8e69945")
+      .send();
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/6354aabc79cb2729c8e69941")
+      .send({
         uid: 428756985,
         vendor: "sder23423",
         status: "offline",
         gateway: null,
         date: Date.now,
       });
-      expect(res.statusCode).toBe(201);
-      expect(res.body.name).toBe("Peripheral 2");
-    } catch (error) {
-      expect(error);
-    }
-  });
-});
-
-/** Testing Update a Gateway */
-describe("PUT /api/v1/peripherals/:id", () => {
-  it("should update a peripheral", async () => {
-    try {
-      const res = await request(app)
-        .patch("/api/v1/peripherals/6350beac53f9338a0b10db09")
-        .send({
-          uid: 428756985,
-          vendor: "sder23423",
-          status: "offline",
-          gateway: null,
-          date: Date.now,
-        });
-      expect(res.statusCode).toBe(200);
-      expect(res.body.price).toBe(104);
-    } catch (error) {
-      expect(error);
-    }
+    expect(response.statusCode).toBe(200);
   });
 });
 
 /** Testing Delete a Peripheral */
 describe("DELETE /api/v1/peripherals/:id", () => {
-  it("should delete a peripheral", async () => {
-    try {
-      const res = await request(app).delete(
-        "/api/v1/peripherals/6350beac53f9338a0b10db09"
-      );
-      expect(res.statusCode).toBe(200);
-    } catch (error) {
-      expect(error);
-    }
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .get("/api/v1/peripherals/63541a766a4966909f491a00")
+      .send();
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .delete("/api/v1/peripherals/6354aabc79cb2729c8e69941")
+      .send();
+    expect(response.statusCode).toBe(200);
   });
 });

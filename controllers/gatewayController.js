@@ -1,7 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { BadRequestError, NotFoundError } from "../errors/index.js";
 import Gateway from "../models/Gateway.js";
-//import { isIPv4 } from "is-ip";
 import net from "net";
 import Peripheral from "../models/Peripheral.js";
 

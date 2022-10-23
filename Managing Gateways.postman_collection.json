@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "4f22b740-42f3-47a8-bcdd-c263aa6121ba",
+		"name": "Managing Gateways",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gateways",
+			"item": [
+				{
+					"name": "Get All Gateways",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/gateways",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Gateway",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"serialNumber\": \"vwxyz0123456795\",\r\n    \"gatewayName\": \"Cubannine\",\r\n    \"address\": \"192.168.0.3\",\r\n    \"peripheralDevice\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/gateways",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Gateway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/gateways/634eb43b770654e867eaa3fc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways",
+								"634eb43b770654e867eaa3fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Gateway",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/gateways/634ebc344e8be861067f2435",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways",
+								"634ebc344e8be861067f2435"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gateway",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"serialNumber\": \"vwxyz0123456783\",\r\n    \"gatewayName\": \"Cubanten\",\r\n    \"address\": \"192.168.0.2\",\r\n    \"peripheralDevice\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/gateways/634ebf6ce8f4dc2f7b886a70",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways",
+								"634ebf6ce8f4dc2f7b886a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Add Peripheral Device ",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"peripheral\": \"6354aa003cf4a464dc601ac6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/gateways/6354ae3fce9d418d7ae77916/add",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways",
+								"6354ae3fce9d418d7ae77916",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Peripheral Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"peripheral\": \"6354aa003cf4a464dc601ac6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/gateways/6354ae3fce9d418d7ae77916/delete",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"gateways",
+								"6354ae3fce9d418d7ae77916",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Peripheral",
+			"item": [
+				{
+					"name": "Get All Peripherals Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/peripherals",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"peripherals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Peripheral Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/peripherals/erwer34wwerwerwe",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"peripherals",
+								"erwer34wwerwerwe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Peripheral Device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/peripherals/6354aa003cf4a464dc601ac6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"peripherals",
+								"6354aa003cf4a464dc601ac6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Peripheral Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uid\": \"428756986\",\r\n    \"vendor\": \"sder23423\",\r\n    \"status\": \"offline\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/peripherals",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"peripherals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

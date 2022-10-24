@@ -28,14 +28,11 @@ export const deletePeripheral = async (req, res) => {
 };
 
 export const createPeripheral = async (req, res) => {
-  const { uid, vendor, date, status, gateway } = req.body;
+  const { uid, vendor } = req.body;
   if (!uid || !vendor) {
     throw new BadRequestError("PLease provide all values");
   }
-  /*const gatewayExists = await Gateway.findOne({ _id: gateway });
-  if (!gatewayExists) {
-    throw new NotFoundError(`No gateway with id ${gateway}`);
-  }*/
+  req.body.gateway = null;
   const peripheral = await Peripheral.create(req.body);
   res.status(StatusCodes.CREATED).json({ peripheral });
 };

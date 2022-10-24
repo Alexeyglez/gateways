@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { response } from "express";
 import mongoose from "mongoose";
 import request from "supertest";
 
@@ -115,6 +116,48 @@ describe("PUT /api/v1/gateways/:id", () => {
   });
 });
 
+/** Testing Add Peripheral Device to Gateway */
+describe("PUT /api/v1/gateways/:id/add", () => {
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .put("/api/v1/gateways/63543c9c35ba103f7dcc4700/add")
+      .send({
+        peripheral: "6354aa003cf4a464dc601ac6",
+      });
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .put("/api/v1/gateways/63543c9c35ba103f7dcc4738/add")
+      .send({
+        peripheral: "6354aa003cf4a464dc601ac6",
+      });
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+/** Testing Delete Peripheral Device to Gateway */
+describe("DELETE /api/v1/gateways/:id/delete", () => {
+  test("should respond with a 404 status code", async () => {
+    const response = await request(app)
+      .delete("/api/v1/gateways/63543c9c35ba103f7dcc4700/delte")
+      .send({
+        peripheral: "6354aa003cf4a464dc601ac6",
+      });
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("should respond with a 200 status code", async () => {
+    const response = await request(app)
+      .delete("/api/v1/gateways/63543c9c35ba103f7dcc4738/delete")
+      .send({
+        peripheral: "6354aa003cf4a464dc601ac6",
+      });
+    expect(response.statusCode).toBe(200);
+  });
+});
+
 /** Testing Delete a Gateway */
 describe("DELETE /api/v1/gateways/:id", () => {
   test("should respond with a 200 status code", async () => {
@@ -147,7 +190,7 @@ describe("GET /api/v1/peripherals", () => {
   });
 });
 
-/** Testing Get Single Peripheral */
+/** Testing Get Single Peripheral Device */
 describe("GET /api/v1/peripherals/:id", () => {
   test("should respond with a 200 status code", async () => {
     const response = await request(app)
@@ -219,7 +262,7 @@ describe("POST /api/v1/peripherals", () => {
   });
 });
 
-/** Testing Update a Peripheral */
+/** Testing Update a Peripheral Device */
 describe("PUT /api/v1/peripherals/:id", () => {
   test("should respond with a 404 status code", async () => {
     const response = await request(app)
@@ -242,7 +285,7 @@ describe("PUT /api/v1/peripherals/:id", () => {
   });
 });
 
-/** Testing Delete a Peripheral */
+/** Testing Delete a Peripheral Device*/
 describe("DELETE /api/v1/peripherals/:id", () => {
   test("should respond with a 404 status code", async () => {
     const response = await request(app)

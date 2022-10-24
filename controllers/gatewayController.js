@@ -13,7 +13,7 @@ export const getSingleGateway = async (req, res) => {
   const { id: gatewayId } = req.params;
   const gateway = await Gateway.findOne({ _id: gatewayId });
   if (!gateway) {
-    throw new NotFoundError(`No found gateway with serial number ${gatewayId}`);
+    throw new NotFoundError(`No found gateway with id ${gatewayId}`);
   }
 
   res.status(StatusCodes.OK).json({ gateway });
@@ -79,6 +79,8 @@ export const addPeripheral = async (req, res) => {
   const { peripheral } = req.body;
 
   const gateway = await Gateway.findOne({ _id: gatewayId });
+  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
+
   if (!gateway) {
     throw new NotFoundError(`No gateway with id ${gatewayId}`);
   }
@@ -87,17 +89,27 @@ export const addPeripheral = async (req, res) => {
     throw new BadRequestError("No peripheral device provided");
   }
 
+  if (!peripheralDevice) {
+    throw new NotFoundError(`No peripheral device with id ${peripheral}`);
+  }
+
+  if (peripheralDevice.gateway !== null) {
+    throw new BadRequestError(
+      "The peripheral device is already asociate another gateway"
+    );
+  }
+
   if (gateway.peripheralDevice.length >= 10) {
     throw new BadRequestError(
-      "The gateway cannnot have more 10 peripherals devices"
+      "The gateway cannot have more 10 peripherals devices"
     );
   }
 
   if (gateway.peripheralDevice.includes(peripheral)) {
     throw new BadRequestError("The peripheral is already exists in gateway");
   }
+
   gateway.peripheralDevice.push(peripheral);
-  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
 
   peripheralDevice.gateway = gateway._id;
   await peripheralDevice.save();
@@ -111,17 +123,28 @@ export const deletePeripheral = async (req, res) => {
   const { peripheral } = req.body;
 
   const gateway = await Gateway.findOne({ _id: gatewayId });
+  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
+
   if (!gateway) {
     throw new NotFoundError(`No gateway with id ${gatewayId}`);
   }
+
   if (!peripheral) {
     throw new BadRequestError("No peripheral device provided");
   }
+
+  if (!peripheralDevice) {
+    throw new NotFoundError(`No peripheral device with id ${peripheral}`);
+  }
+
   if (!gateway.peripheralDevice.includes(peripheral)) {
     throw new BadRequestError("The peripheral device is not exists in gateway");
   }
-  gateway.peripheralDevice.splice(gateway.peripheralDevice.indexOf(peripheral));
-  const peripheralDevice = await Peripheral.findOne({ _id: peripheral });
+
+  gateway.peripheralDevice.splice(
+    gateway.peripheralDevice.indexOf(peripheral),
+    1
+  );
 
   peripheralDevice.gateway = null;
   await peripheralDevice.save();
